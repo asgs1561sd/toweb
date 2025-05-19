@@ -12,6 +12,7 @@
             --dark-color: #1a1a1a;
             --light-color: #f8f9fa;
             --success-color: #28a745;
+            --error-color: #dc3545;
             --text-color: #333;
         }
         
@@ -265,6 +266,81 @@
             margin-bottom: 15px;
         }
         
+        /* تصميم صفحة الاتصال */
+        .contact {
+            background-color: #f9fbfe;
+            padding: 60px 20px;
+        }
+        
+        .contact .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+        
+        .contact .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .contact .section-title h2 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .contact .section-title p {
+            color: #555;
+            font-size: 1rem;
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: 0.3s border;
+            background-color: #fdfdfd;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+            box-shadow: 0 0 4px rgba(0,123,255,0.2);
+        }
+        
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .contact-form .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            font-size: 1.1rem;
+            background-color: var(--secondary-color);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .contact-form .btn:hover {
+            background-color: #eeb721;
+        }
+        
         /* تصميم الفوتر */
         .footer {
             background-color: var(--dark-color);
@@ -382,6 +458,78 @@
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .contact .container {
+                padding: 25px;
+            }
+            
+            .contact-form .btn {
+                font-size: 1rem;
+            }
+        }
+        
+        /* أنظمة التحميل والتنبيهات */
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--secondary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none;
+        }
+        
+        .alert {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            width: 90%;
+            max-width: 500px;
+            animation: slideIn 0.5s forwards;
+        }
+        
+        @keyframes slideIn {
+            from { top: -100px; opacity: 0; }
+            to { top: 20px; opacity: 1; }
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
     </style>
 </head>
@@ -514,106 +662,29 @@
     </section>
     
     <!-- قسم اتصل بنا -->
-   <section class="contact" id="contact">
-    <div class="container">
-        <div class="section-title">
-            <h2>تواصل معنا</h2>
-            <p>نحن هنا للإجابة على جميع استفساراتك في أسرع وقت ممكن.</p>
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>تواصل معنا</h2>
+                <p>نحن هنا للإجابة على جميع استفساراتك في أسرع وقت ممكن.</p>
+            </div>
+            
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="اسمك الكامل" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="بريدك الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" placeholder="اكتب رسالتك هنا..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn">✉️ إرسال الرسالة</button>
+                </form>
+            </div>
         </div>
-        
-        <div class="contact-form">
-            <form id="contactForm">
-                <div class="form-group">
-                    <input type="text" id="name" placeholder="اسمك الكامل" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" placeholder="بريدك الإلكتروني" required>
-                </div>
-                <div class="form-group">
-                    <textarea id="message" placeholder="اكتب رسالتك هنا..." required></textarea>
-                </div>
-                <button type="submit" class="btn">✉️ إرسال الرسالة</button>
-            </form>
-        </div>
-    </div>
-</section>
-
-<style>
-    .contact {
-        background-color: #f9fbfe;
-        padding: 60px 20px;
-    }
-    .contact .container {
-        max-width: 600px;
-        margin: auto;
-        background: #fff;
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    }
-    .contact .section-title {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-    .contact .section-title h2 {
-        font-size: 2rem;
-        color: #e6a700;
-        margin-bottom: 10px;
-    }
-    .contact .section-title p {
-        color: #555;
-        font-size: 1rem;
-    }
-    .contact-form .form-group {
-        margin-bottom: 20px;
-    }
-    .contact-form input,
-    .contact-form textarea {
-        width: 100%;
-        padding: 14px 18px;
-        border: 1px solid #ddd;
-        border-radius: 12px;
-        font-size: 1rem;
-        transition: 0.3s border;
-        background-color: #fdfdfd;
-    }
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-        border-color: #e6a700;
-        outline: none;
-        box-shadow: 0 0 4px rgba(0,123,255,0.2);
-    }
-    .contact-form textarea {
-        resize: vertical;
-        min-height: 120px;
-    }
-    .contact-form .btn {
-        display: block;
-        width: 100%;
-        padding: 14px;
-        font-size: 1.1rem;
-        background-color: #e6a700;
-        color: #fff;
-        border: none;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-    .contact-form .btn:hover {
-        background-color: #eeb721;
-    }
-
-    /* استجابة للموبايل */
-    @media (max-width: 480px) {
-        .contact .container {
-            padding: 25px;
-        }
-        .contact-form .btn {
-            font-size: 1rem;
-        }
-    }
-</style>
-
+    </section>
     
     <!-- الفوتر -->
     <footer class="footer">
@@ -672,6 +743,11 @@
         </div>
     </footer>
     
+    <!-- نظام التحميل -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+    
     <script>
         // جافاسكريبت للقائمة المتحركة على الهواتف
         const menuBtn = document.getElementById('menuBtn');
@@ -720,42 +796,254 @@
             });
         });
         
-        // تفعيل الأزرار
+        // ========== نظام Backend محلي ==========
+        
+        // عناصر الواجهة
         const startBtn = document.getElementById('startBtn');
         const loginBtn = document.getElementById('loginBtn');
         const planBtns = document.querySelectorAll('.plan-btn');
         const contactForm = document.getElementById('contactForm');
+        const loadingOverlay = document.getElementById('loadingOverlay');
         
+        // تخزين البيانات محلياً
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+        let subscriptions = JSON.parse(localStorage.getItem('subscriptions')) || [];
+        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+        
+        // دالة لعرض التحميل
+        function showLoading() {
+            loadingOverlay.style.display = 'flex';
+        }
+        
+        // دالة لإخفاء التحميل
+        function hideLoading() {
+            loadingOverlay.style.display = 'none';
+        }
+        
+        // دالة لعرض التنبيهات
+        function showAlert(message, type = 'success') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+        
+        // دالة لتسجيل الدخول
+        function handleLogin() {
+            if (currentUser) {
+                // إذا كان المستخدم مسجل دخول بالفعل
+                showAlert(`مرحباً بعودتك ${currentUser.name}!`, 'success');
+                return;
+            }
+            
+            // عرض نموذج تسجيل الدخول
+            const email = prompt('أدخل بريدك الإلكتروني:');
+            if (!email) return;
+            
+            const password = prompt('أدخل كلمة المرور:');
+            if (!password) return;
+            
+            showLoading();
+            
+            // محاكاة اتصال بالخادم
+            setTimeout(() => {
+                hideLoading();
+                
+                // البحث عن المستخدم في قاعدة البيانات المحلية
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    currentUser = user;
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    showAlert(`تم تسجيل الدخول بنجاح! مرحباً ${user.name}`);
+                    
+                    // تحديث واجهة المستخدم
+                    loginBtn.textContent = 'لوحة التحكم';
+                    loginBtn.href = '#';
+                    loginBtn.removeEventListener('click', handleLogin);
+                    loginBtn.addEventListener('click', () => {
+                        showAlert(`مرحباً ${user.name}! أنت مسجل دخول بالفعل.`, 'success');
+                    });
+                } else {
+                    showAlert('البريد الإلكتروني أو كلمة المرور غير صحيحة', 'error');
+                }
+            }, 1000);
+        }
+        
+        // دالة للتسجيل
+        function handleSignup() {
+            const name = prompt('أدخل اسمك الكامل:');
+            if (!name) return;
+            
+            const email = prompt('أدخل بريدك الإلكتروني:');
+            if (!email) return;
+            
+            const password = prompt('أدخل كلمة المرور:');
+            if (!password) return;
+            
+            showLoading();
+            
+            // محاكاة اتصال بالخادم
+            setTimeout(() => {
+                hideLoading();
+                
+                // التحقق من وجود المستخدم مسبقاً
+                const userExists = users.some(u => u.email === email);
+                
+                if (userExists) {
+                    showAlert('هذا البريد الإلكتروني مسجل بالفعل', 'error');
+                    return;
+                }
+                
+                // إنشاء مستخدم جديد
+                const newUser = {
+                    id: Date.now(),
+                    name,
+                    email,
+                    password,
+                    createdAt: new Date().toISOString()
+                };
+                
+                users.push(newUser);
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                currentUser = newUser;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                
+                showAlert(`تم التسجيل بنجاح! مرحباً ${name}`);
+                
+                // تحديث واجهة المستخدم
+                loginBtn.textContent = 'لوحة التحكم';
+                loginBtn.href = '#';
+                loginBtn.removeEventListener('click', handleLogin);
+                loginBtn.addEventListener('click', () => {
+                    showAlert(`مرحباً ${name}! أنت مسجل دخول بالفعل.`, 'success');
+                });
+            }, 1000);
+        }
+        
+        // دالة لمعالجة الاشتراك في الباقات
+        function handlePlanSubscription(planType) {
+            if (!currentUser) {
+                const proceed = confirm('يجب تسجيل الدخول أولاً. هل تريد التسجيل الآن؟');
+                if (proceed) {
+                    handleSignup();
+                }
+                return;
+            }
+            
+            showLoading();
+            
+            // محاكاة اتصال بالخادم
+            setTimeout(() => {
+                hideLoading();
+                
+                // إنشاء اشتراك جديد
+                const newSubscription = {
+                    id: Date.now(),
+                    userId: currentUser.id,
+                    plan: planType,
+                    date: new Date().toISOString(),
+                    status: 'active'
+                };
+                
+                subscriptions.push(newSubscription);
+                localStorage.setItem('subscriptions', JSON.stringify(subscriptions));
+                
+                let planName = '';
+                switch(planType) {
+                    case 'basic': planName = 'الباقة الأساسية'; break;
+                    case 'medium': planName = 'الباقة المتوسطة'; break;
+                    case 'premium': planName = 'الباقة المتقدمة'; break;
+                }
+                
+                showAlert(`تم الاشتراك بنجاح في ${planName}! شكراً لك ${currentUser.name}`);
+            }, 1500);
+        }
+        
+        // دالة لإرسال نموذج الاتصال
+        function handleContactFormSubmit(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !email || !message) {
+                showAlert('الرجاء ملء جميع الحقول المطلوبة', 'error');
+                return;
+            }
+            
+            showLoading();
+            
+            // محاكاة اتصال بالخادم
+            setTimeout(() => {
+                hideLoading();
+                
+                // حفظ الرسالة في التخزين المحلي
+                const newContact = {
+                    id: Date.now(),
+                    name,
+                    email,
+                    message,
+                    date: new Date().toISOString(),
+                    read: false
+                };
+                
+                contacts.push(newContact);
+                localStorage.setItem('contacts', JSON.stringify(contacts));
+                
+                showAlert(`شكراً لك ${name}! تم استلام رسالتك وسنتواصل معك قريباً.`);
+                contactForm.reset();
+            }, 1000);
+        }
+        
+        // دالة للتحقق من حالة المستخدم (هل هو مسجل دخول أم لا)
+        function checkAuthStatus() {
+            if (currentUser) {
+                // تحديث واجهة المستخدم لتعكس حالة تسجيل الدخول
+                loginBtn.textContent = 'لوحة التحكم';
+                loginBtn.href = '#';
+                loginBtn.removeEventListener('click', handleLogin);
+                loginBtn.addEventListener('click', () => {
+                    showAlert(`مرحباً ${currentUser.name}! أنت مسجل دخول بالفعل.`, 'success');
+                });
+            }
+        }
+        
+        // تعيين معالج الأحداث
         startBtn.addEventListener('click', () => {
-            alert('مرحباً بك في منصتنا! سنوجهك الآن إلى صفحة الباقات.');
+            // توجيه المستخدم إلى قسم الباقات
+            window.location.href = '#plans';
         });
         
         loginBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            alert('سيتم توجيهك إلى صفحة تسجيل الدخول');
-            // هنا يمكنك إضافة تحويل إلى صفحة تسجيل الدخول
+            handleLogin();
         });
         
         planBtns.forEach(btn => {
             btn.addEventListener('click', function() {
                 const plan = this.getAttribute('data-plan');
-                alert(`شكراً لاختيارك الباقة ${plan}. سيتم توجيهك إلى صفحة الدفع.`);
-                // هنا يمكنك إضافة تحويل إلى صفحة الدفع
+                handlePlanSubscription(plan);
             });
         });
         
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            alert(`شكراً لك ${name}! تم استلام رسالتك وسنتواصل معك قريباً.`);
-            this.reset();
-        });
+        contactForm.addEventListener('submit', handleContactFormSubmit);
         
-        // إضافة تأثير التحميل للصفحة
-        window.addEventListener('load', () => {
+        // عند تحميل الصفحة، تحقق من حالة المصادقة
+        window.addEventListener('DOMContentLoaded', () => {
+            checkAuthStatus();
             document.body.style.opacity = '1';
         });
         
+        // تأثير ظهور الصفحة تدريجياً
         document.body.style.opacity = '0';
         document.body.style.transition = 'opacity 0.5s ease-in';
     </script>
